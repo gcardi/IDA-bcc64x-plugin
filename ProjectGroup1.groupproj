@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{4FD9ED1C-BE51-4310-A551-ABE4CDBB9879}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="hello64.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="VCL\64BitAddressAware\HelloVCL64.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="VCL\32BitAddressAware\HelloVCL.cbproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="hello64">
+        <MSBuild Projects="hello64.cbproj"/>
+    </Target>
+    <Target Name="hello64:Clean">
+        <MSBuild Projects="hello64.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="hello64:Make">
+        <MSBuild Projects="hello64.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="HelloVCL64">
+        <MSBuild Projects="VCL\64BitAddressAware\HelloVCL64.cbproj"/>
+    </Target>
+    <Target Name="HelloVCL64:Clean">
+        <MSBuild Projects="VCL\64BitAddressAware\HelloVCL64.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="HelloVCL64:Make">
+        <MSBuild Projects="VCL\64BitAddressAware\HelloVCL64.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="HelloVCL">
+        <MSBuild Projects="VCL\32BitAddressAware\HelloVCL.cbproj"/>
+    </Target>
+    <Target Name="HelloVCL:Clean">
+        <MSBuild Projects="VCL\32BitAddressAware\HelloVCL.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="HelloVCL:Make">
+        <MSBuild Projects="VCL\32BitAddressAware\HelloVCL.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="hello64;HelloVCL64;HelloVCL"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="hello64:Clean;HelloVCL64:Clean;HelloVCL:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="hello64:Make;HelloVCL64:Make;HelloVCL:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
